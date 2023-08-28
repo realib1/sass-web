@@ -1,0 +1,209 @@
+@use 'sass:math';
+
+$utilities: (
+    'padding': ('prefix': 'p',
+        'values': ('0': 0,
+            '1': $base-padding,
+            '2': $base-padding * 2,
+            '3': $base-padding * 4,
+            '4': $base-padding * 6,
+            '5': $base-padding * 8,
+        ),
+    ),
+    'padding-left': ('prefix': 'pl',
+        'values': ('0': 0,
+            '1': $base-padding,
+            '2': $base-padding * 2,
+            '3': $base-padding * 4,
+            '4': $base-padding * 6,
+            '5': $base-padding * 8,
+        ),
+    ),
+
+    'padding-right': ('prefix': 'pr',
+        'values': ('0': 0,
+            '1': $base-padding,
+            '2': $base-padding * 2,
+            '3': $base-padding * 4,
+            '4': $base-padding * 6,
+            '5': $base-padding * 8,
+        ),
+    ),
+
+    'padding-top': ('prefix': 'pt',
+        'values': ('0': 0,
+            '1': $base-padding,
+            '2': $base-padding * 2,
+            '3': $base-padding * 4,
+            '4': $base-padding * 6,
+            '5': $base-padding * 8,
+        ),
+    ),
+
+    'padding-bottom': ('prefix': 'pb',
+        'values': ('0': 0,
+            '1': $base-padding,
+            '2': $base-padding * 2,
+            '3': $base-padding * 4,
+            '4': $base-padding * 6,
+            '5': $base-padding * 8,
+        ),
+    ),
+
+    // Margin
+    'margin': ('prefix': 'm',
+        'values': ('0': 0,
+            '1': $base-padding,
+            '2': $base-padding * 2,
+            '3': $base-padding * 4,
+            '4': $base-padding * 6,
+            '5': $base-padding * 8,
+        ),
+    ),
+
+    'margin-left': ('prefix': 'ml',
+        'values': ('0': 0,
+            '1': $base-padding,
+            '2': $base-padding * 2,
+            '3': $base-padding * 4,
+            '4': $base-padding * 6,
+            '5': $base-padding * 8,
+        ),
+    ),
+
+    'margin-right': ('prefix': 'mr',
+        'values': ('0': 0,
+            '1': $base-padding,
+            '2': $base-padding * 2,
+            '3': $base-padding * 4,
+            '4': $base-padding * 6,
+            '5': $base-padding * 8,
+        ),
+    ),
+
+    'margin-top': ('prefix': 'mt',
+        'values': ('0': 0,
+            '1': $base-padding,
+            '2': $base-padding * 2,
+            '3': $base-padding * 4,
+            '4': $base-padding * 6,
+            '5': $base-padding * 8,
+        ),
+    ),
+
+    'margin-bottom': ('prefix': 'mb',
+        'values': ('0': 0,
+            '1': $base-padding,
+            '2': $base-padding * 2,
+            '3': $base-padding * 4,
+            '4': $base-padding * 6,
+            '5': $base-padding * 8,
+        ),
+    ),
+
+    // Opacity
+    "opacity": (
+        'prefix': 'o',
+        'values': (
+            '10': .1,
+            '20': .2,
+            '30':.3,
+            '40':.4,
+            '50':.5,
+            '60':.6,
+            '70':.7,
+            '80':.8,
+            '90':.9,
+            '100': 1,
+        ),
+    ),
+
+    // Border Radius
+    "border-radius": (
+        'prefix': 'br',
+        'values': (
+            'default': $border-radius,
+            'none': 0,
+            'xs': math.div($border-radius, 4),
+            'sm': math.div($border-radius, 2),
+            'lg': $border-radius * 2,
+            'full': 50%,
+        ),
+    ),
+
+    // Display
+    "display": (
+        'prefix': 'display',
+        'values': (
+            'n': none,
+            'f': flex,
+            'i': inline,
+            'b': block,
+            'i-b': inline-block,
+        ),
+    ),
+
+    // Font Size
+    "font-size": (
+        'prefix': 'fs',
+        'values': (
+            'xs': $fs-sm,
+            'sm': $fs-sm,
+            'md': $fs-md,
+            'lg': $fs-lg,
+            'xl': $fs-xl,
+            'xxl': $fs-xxl
+        ),
+    ),
+
+);
+
+// Generate Utility classes
+@each $property,
+$map in $utilities {
+    $prefix: map-get($map , 'prefix');
+    $values: map-get($map, 'values');
+
+    @each $k,
+    $v in $values {
+        @if($k =='default') {
+            .#{$prefix} {
+                #{$property}: $v;
+            }
+        }
+
+        @else {
+            .#{$prefix}-#{$k} {
+                #{$property}: $v;
+            }
+        }
+    }
+};
+
+$ff: (
+    'base': $base-ff,
+    'primary': $ff-primary,
+    'secondary': $ff-secondary,
+);
+
+@each $key, $val in $ff {
+    .ff-#{$key} {
+        font-family: $val;
+    }
+}
+
+
+// Font Weight
+
+$fw: (
+    'normal': $fw-normal,
+    'bold': $fw-bold,
+    'bolder': $fw-bolder,
+);
+
+@each $key, $val in $fw {
+    .fw-#{$key} {
+        font-weight: $val;
+    }
+}
+

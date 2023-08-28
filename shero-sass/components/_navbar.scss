@@ -1,0 +1,52 @@
+%flex-layout {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.navbar {
+    @extend %flex-layout;
+    padding: $base-padding $base-padding * 2;
+    box-shadow: $base-bshadow;
+
+    .site-title {
+        font-size: $fs-lg;
+    }
+
+    .container {
+        @extend %flex-layout;
+    }
+
+}
+
+
+@each $key, $val in $colors {
+    .navbar-#{$key} {
+        @extend .navbar;
+        background-color: $val;
+    }
+
+    @if ($val != black and $val != white ) {
+        @for $i from 1 through 9 {
+            .navbar-#{$key}-light-#{$i} {
+                @extend .navbar;
+                background-color: mix($val, white, $i * 10%);;
+            }
+        }
+
+
+        @for $i from 1 through 9 {
+            .navbar-#{$key}-dark-#{$i} {
+                @extend .navbar;
+                background-color: mix($val, black, $i * 10%);;
+            }
+        }
+
+
+    }
+}
+
+// Dark and Light Navbar
+
